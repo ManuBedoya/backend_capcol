@@ -1,20 +1,24 @@
 package org.capcol.infraestructure.panache.user;
 
-import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
+import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import jakarta.persistence.Cacheable;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import jakarta.persistence.Column;
 
 @Entity
 @Table(name = "users")
 @Cacheable
-public class UserEntity extends PanacheEntityBase {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserEntity extends PanacheEntity {
 
-    @Id
-    @Column(name = "id", unique = true)
-    private String id;
+    @Column(name = "identification", unique = true)
+    private String identification;
     @Column(name = "email")
     private String email;
     @Column(name = "name")
@@ -32,6 +36,5 @@ public class UserEntity extends PanacheEntityBase {
     @Column(name = "username", unique = true)
     private String username;
     @Column(name = "password")
-    private String password; 
-
+    private String password;
 }

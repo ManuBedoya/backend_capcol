@@ -1,20 +1,24 @@
 package org.capcol.infraestructure.panache.product;
 
-import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
+import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "products")
 @Cacheable
-public class ProductEntity extends PanacheEntityBase {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class ProductEntity extends PanacheEntity {
 
-    @Id
-    @Column(name = "id", unique = true)
-    private String id;
+    @Column(name = "identification", unique = true)
+    private String identification;
     @Column(name = "name")
     private String name;
     @Column(name = "description")

@@ -1,17 +1,25 @@
 package org.capcol.core.services;
 
 import org.capcol.infraestructure.panache.user.UserEntity;
-import java.util.List;
+import org.capcol.infraestructure.panache.user.UserRepository;
 
-import io.quarkus.panache.common.Sort;
+import java.util.List;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class UserServices {
 
+    @Inject
+    UserRepository userRepository;
+
     public Uni<List<UserEntity>> getUsers() {
-        return UserEntity.listAll();
+        return userRepository.listAll();
+    }
+
+    public Uni<UserEntity> createUser(UserEntity user) {
+        return userRepository.persist(user);
     }
 
 }

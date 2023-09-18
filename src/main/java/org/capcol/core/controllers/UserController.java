@@ -14,7 +14,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 
 @ApplicationScoped
-public class ControllerUser implements ControllerResource {
+public class UserController implements ControllerResource {
 
     @Inject
     UserServices userServices;

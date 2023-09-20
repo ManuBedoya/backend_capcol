@@ -32,6 +32,13 @@ public class ProductController {
         return productService.getProducts();
     }
 
+    @GET
+    @Path("/{id}")
+    @WithSession
+    public Uni<ProductEntity> getProducts(Long id) {
+        return productService.getProduct(id);
+    }
+
     @POST
     @WithTransaction
     public Uni<ProductEntity> createProduct(ProductEntity product) {

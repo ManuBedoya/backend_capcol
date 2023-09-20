@@ -22,4 +22,8 @@ public class UserServices {
         return userRepository.persist(user);
     }
 
+    public Uni<UserEntity> getUser(String username) {
+        return userRepository.findByUsername(username);
+    }
+
 }

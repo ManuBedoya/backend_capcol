@@ -32,6 +32,13 @@ public class UserController {
         return userServices.getUsers();
     }
 
+    @GET
+    @Path("/{username}")
+    @WithSession
+    public Uni<UserEntity> getUser(String username) {
+        return userServices.getUser(username);
+    }
+
     @POST
     @WithTransaction
     public Uni<UserEntity> createUser(UserEntity user) {

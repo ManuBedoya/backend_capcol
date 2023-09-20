@@ -23,4 +23,8 @@ public class ProductServices {
         return productRepository.persist(product);
     }
 
+    public Uni<ProductEntity> getProduct(Long id) {
+        return productRepository.findById(id);
+    }
+
 }

@@ -3,9 +3,8 @@ package org.capcol.core.services;
 import java.util.logging.Logger;
 
 import org.capcol.domain.model.order.Order;
+import org.capcol.domain.usecases.OrderActions;
 
-import io.quarkus.mailer.Mail;
-import io.quarkus.mailer.reactive.ReactiveMailer;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -14,12 +13,12 @@ import jakarta.inject.Inject;
 public class ActionServices {
 
     @Inject
-    ReactiveMailer mailer;
+    OrderActions orderActions;
 
     private static final Logger adapter = Logger.getLogger("ActionServices");
 
     public Uni<Void> buyProduct(Order order) {
-        return mailer.send(Mail.withText("manuelfernandobedoya@gmail.com", "Test quarkus", "Text With Quarkus"));
+        return orderActions.sendEmail(order);
     }
 
 }

@@ -66,6 +66,14 @@
       <artifactId>quarkus-resteasy-reactive-jsonb</artifactId>
       <version>3.4.0</version>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-mailer</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-qute</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <plugins>

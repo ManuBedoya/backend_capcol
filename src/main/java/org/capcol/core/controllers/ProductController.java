@@ -9,6 +9,7 @@ import io.quarkus.hibernate.reactive.panache.common.WithSession;
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Uni;
 import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -44,6 +45,7 @@ public class ProductController {
 
     @POST
     @WithTransaction
+    @RolesAllowed({ Constants.ADMIN, Constants.SERVICE })
     public Uni<ProductEntity> createProduct(ProductEntity product) {
         return productService.createProduct(product);
     }

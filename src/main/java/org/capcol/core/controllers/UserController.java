@@ -29,7 +29,7 @@ public class UserController {
 
     @GET
     @WithSession
-    @RolesAllowed({ Constants.ADMIN })
+    @RolesAllowed({ Constants.ADMIN, Constants.SERVICE })
     public Uni<List<UserEntity>> getUsers() {
         return userServices.getUsers();
     }
@@ -37,12 +37,14 @@ public class UserController {
     @GET
     @Path("/{username}")
     @WithSession
+    @RolesAllowed({ Constants.ADMIN, Constants.USER, Constants.SERVICE })
     public Uni<UserEntity> getUser(String username) {
         return userServices.getUser(username);
     }
 
     @POST
     @WithTransaction
+    @RolesAllowed({ Constants.ADMIN, Constants.SERVICE })
     public Uni<UserEntity> createUser(UserEntity user) {
         return userServices.createUser(user);
     }

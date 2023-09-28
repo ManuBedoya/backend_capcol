@@ -8,6 +8,7 @@ import org.capcol.util.Constants;
 import io.quarkus.hibernate.reactive.panache.common.WithSession;
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Uni;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -28,6 +29,7 @@ public class UserController {
 
     @GET
     @WithSession
+    @RolesAllowed({ Constants.ADMIN })
     public Uni<List<UserEntity>> getUsers() {
         return userServices.getUsers();
     }

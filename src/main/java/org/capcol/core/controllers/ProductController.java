@@ -8,6 +8,7 @@ import org.capcol.util.Constants;
 import io.quarkus.hibernate.reactive.panache.common.WithSession;
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Uni;
+import jakarta.annotation.security.PermitAll;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -27,6 +28,7 @@ public class ProductController {
     ProductServices productService;
 
     @GET
+    @PermitAll
     @WithSession
     public Uni<List<ProductEntity>> getProducts() {
         return productService.getProducts();
@@ -34,6 +36,7 @@ public class ProductController {
 
     @GET
     @Path("/{id}")
+    @PermitAll
     @WithSession
     public Uni<ProductEntity> getProducts(Long id) {
         return productService.getProduct(id);

@@ -1,34 +1,23 @@
-#
-# Build stage
-#
-#FROM maven:3.6.0-jdk-11-slim AS build
-#COPY src /home/app/src
-#COPY pom.xml /home/app
-#RUN mvn -f /home/app/pom.xml clean package
+# Usar una imagen base con JDK 11 y Maven
+FROM maven:3.8.4-openjdk-17 AS build
 
-#
-# Package stage
-#
-#FROM openjdk:11-jre-slim
-#COPY --from=build /home/app/target/backend_capcol-1.0.0-SNAPSHOT.jar /usr/local/lib/backend_capcol.jar
-#EXPOSE 8080
-#ENTRYPOINT ["java","-jar","/usr/local/lib/backend_capcol.jar"]
-FROM registry.access.redhat.com/ubi8/openjdk-17:1.16
+# Establecer un directorio de trabajo
+WORKDIR /app
 
-ENV LANGUAGE='en_US:en'
+# Copiar archivos de tu proyecto al directorio de trabajo
+COPY . /app
 
+# Ejecutar Maven para construir el proyecto
+RUN mvn clean package
 
-# We make four distinct layers so if there are application changes the library layers can be re-used
-COPY --chown=185 pom.xml /deployments/app/
-RUN mvn -f /deployments/app/pom.xml clean package
-COPY --chown=185 target/quarkus-app/lib/ /deployments/lib/
-COPY --chown=185 target/quarkus-app/*.jar /deployments/
-COPY --chown=185 target/quarkus-app/app/ /deployments/app/
-COPY --chown=185 target/quarkus-app/quarkus/ /deployments/quarkus/
+# Crear una nueva imagen basada en OpenJDK 11
+FROM openjdk:17.0.1-jdk-slim
 
+# Exponer el puerto que utilizará la aplicación
 EXPOSE 8080
-USER 185
-ENV JAVA_OPTS="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
-ENV JAVA_APP_JAR="/deployments/quarkus-run.jar"
 
-ENTRYPOINT [ "/opt/jboss/container/java/run/run-java.sh" ]
+# Copiar el archivo JAR construido desde la etapa anterior
+COPY --from=build /app/target/backend_capcol-1.0.0-SNAPSHOT.jar /app/backend_capcol-1.0.0-SNAPSHOT.jar
+
+# Establecer el punto de entrada para ejecutar la aplicación
+ENTRYPOINT ["java", "-jar", "/app/backend_capcol-1.0.0-SNAPSHOT.jar"]

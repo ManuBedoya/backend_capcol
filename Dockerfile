@@ -18,7 +18,7 @@ FROM openjdk:17.0.1-jdk-slim
 EXPOSE 8080
 
 # Copiar el archivo JAR construido desde la etapa anterior
-COPY --from=build /app/target/quarkus-app/quearkus-run.jar /app/backend_capcol-1.0.0-SNAPSHOT.jar
+COPY --from=build /app/target/quarkus-app/quarkus-run.jar /app/backend_capcol-1.0.0-SNAPSHOT.jar
 
 # Establecer el punto de entrada para ejecutar la aplicación
 ENTRYPOINT ["java", "-jar", "/app/backend_capcol-1.0.0-SNAPSHOT.jar"]

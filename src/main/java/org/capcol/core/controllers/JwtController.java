@@ -7,9 +7,11 @@ import org.capcol.util.Constants;
 import io.quarkus.hibernate.reactive.panache.common.WithSession;
 import io.smallrye.mutiny.Uni;
 import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -30,6 +32,13 @@ public class JwtController {
     @Path("/generate-token")
     public Uni<String> generateUserToken(JwtModel data) {
         return Uni.createFrom().item(jwtServices.generateToken(data));
+    }
+
+    @GET
+    @RolesAllowed({ Constants.ADMIN, Constants.USER, Constants.SERVICE })
+    @Path("/health-token")
+    public String isExpiredToken() {
+        return "No se ha expirado el token";
     }
 
 }

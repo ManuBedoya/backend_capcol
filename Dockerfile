@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . /app
 
 # Ejecutar Maven para construir el proyecto
-RUN ./mvnw clean package
+RUN mvn clean package
 
 # Crear una nueva imagen basada en OpenJDK 11
 FROM openjdk:17.0.1-jdk-slim

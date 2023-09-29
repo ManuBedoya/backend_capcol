@@ -21,4 +21,4 @@ EXPOSE 8080
 COPY --from=build /app/target/quarkus-app/quarkus-run.jar /app/quarkus-run.jar
 
 # Establecer el punto de entrada para ejecutar la aplicación
-RUN java -jar /app/quarkus-run.jar
+ENTRYPOINT ["jar", "-jar", "/app/quarkus-run.jar"]

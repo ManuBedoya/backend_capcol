@@ -1,5 +1,6 @@
 
 *.toml
+privateKey.pem
 
 #Maven
 target/

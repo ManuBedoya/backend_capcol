@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 @ApplicationScoped
 public class JwtServices {
 
-    @ConfigProperty(name = "mp.jwt.verify.issuer")
+    //@ConfigProperty(name = "mp.jwt.verify.issuer")
     private String isUser;
 
     private static final Logger adapter = Logger.getLogger(JwtServices.class.getName());

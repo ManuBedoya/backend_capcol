@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "products")
-@Cacheable
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

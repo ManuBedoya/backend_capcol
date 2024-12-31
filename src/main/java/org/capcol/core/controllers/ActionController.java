@@ -26,7 +26,6 @@ public class ActionController {
 
     @POST
     @Path("/buy")
-    @RolesAllowed({ Constants.ADMIN, Constants.SERVICE })
     public Uni<Void> buyProduct(Order order) {
         return actionServices.buyProduct(order);
     }

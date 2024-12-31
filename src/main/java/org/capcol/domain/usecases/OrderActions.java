@@ -14,9 +14,9 @@ import jakarta.inject.Inject;
 @ApplicationScoped
 public class OrderActions {
 
-    //@ConfigProperty(name = "subject.buy")
+    @ConfigProperty(name = "subject.buy")
     private String subject_buy;
-    //@ConfigProperty(name = "email.send")
+    @ConfigProperty(name = "email.send")
     private String email;
 
     @Inject

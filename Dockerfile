@@ -1,6 +1,6 @@
 # Usar una imagen base con JDK 11 y Maven
 #FROM maven:3.8.4-openjdk-17 AS build
-FROM maven:3.9.4-eclipse-temurin-17-alpine AS build
+FROM eclipse-temurin:21-jdk-alpine AS build
 
 # Establecer un directorio de trabajo
 WORKDIR /app
@@ -12,7 +12,7 @@ COPY . /app
 RUN mvn clean package
 
 # Crear una nueva imagen basada en OpenJDK 11
-FROM openjdk:17.0.1-jdk-slim
+FROM eclipse-temurin:21-jdk-alpine
 
 # Exponer el puerto que utilizará la aplicación
 EXPOSE 8080

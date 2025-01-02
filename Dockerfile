@@ -1,6 +1,6 @@
 # Usar una imagen base con JDK 11 y Maven
 #FROM maven:3.8.4-openjdk-17 AS build
-FROM eclipse-temurin:21-jdk-alpine AS build
+FROM maven:3.9.9-amazoncorretto-21-debian-bookworm AS build
 
 # Establecer un directorio de trabajo
 WORKDIR /app

@@ -18,7 +18,7 @@ FROM eclipse-temurin:21-jdk-alpine
 EXPOSE 8080
 
 # Copiar el archivo JAR construido desde la etapa anterior
-COPY --from=build /target/quarkus-app/ /app/
+COPY --from=build app/target/quarkus-app/ /app/
 
 # Establecer el punto de entrada para ejecutar la aplicación
 CMD ["java", "-jar", "/app/quarkus-run.jar"]
